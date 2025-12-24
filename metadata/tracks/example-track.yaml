@@ -1,0 +1,85 @@
+track_id: "example-001"
+title: "Neon Dreams"
+artist: "Suno Lab"
+creation_date: "2024-12-24"
+
+# Información musical
+musical:
+  genre: "Electronic"
+  subgenre: "Synthwave"
+  bpm: 110
+  key: "C Minor"
+  time_signature: "4/4"
+  duration_seconds: 180
+
+# Mood y energía
+mood:
+  primary: "Nostálgico"
+  secondary: "Atmosférico"
+  energy_level: 6
+  danceability: 7
+  emotional_valence: 5
+
+# Composición
+composition:
+  structure: ["Intro", "Verse", "Chorus", "Verse", "Chorus", "Bridge", "Outro"]
+  has_vocals: true
+  vocal_type: "Synthetic/AI"
+  language: "en"
+
+# Producción
+production:
+  instruments:
+    - "Analog Synths"
+    - "Electric Bass"
+    - "Electronic Drums"
+    - "Atmospheric Pads"
+  effects:
+    - "Reverb"
+    - "Delay"
+    - "Chorus"
+  mixing_style: "Spacious and warm with emphasis on synth layers"
+
+# Generación
+generation:
+  method: "AI-full"
+  ai_model: "Suno v3"
+  prompt_version: "v1.0"
+  seed: 42
+  iterations: 2
+
+# Tags
+tags:
+  - "synthwave"
+  - "nostalgic"
+  - "retro"
+  - "80s"
+  - "cinematic"
+  - "night-drive"
+
+# Uso y derechos
+usage:
+  license: "Personal"
+  copyright: "© 2024 Suno Lab"
+  can_remix: true
+  can_distribute: false
+
+# Referencias
+references:
+  inspired_by:
+    - "Kavinsky - Nightcall"
+    - "The Midnight - Sunset"
+  similar_tracks: []
+
+# Notas
+notes: >
+  Track generado como ejemplo para demostrar el workflow.
+  Funciona bien para escenas nocturnas, conducción, o ambientes retrofuturistas.
+  El balance entre nostalgia y energía es clave.
+
+# Archivos relacionados
+files:
+  audio: "audio/examples/neon-dreams.mp3"
+  lyrics: "lyrics/generated/neon-dreams.md"
+  prompt: "prompts/examples/synthwave-nostalgic.yaml"
+  cover_art: "assets/covers/neon-dreams.png"
