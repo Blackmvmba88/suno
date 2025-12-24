@@ -1,0 +1,58 @@
+---
+title: "Synthwave Nostálgico"
+genre: "Electronic"
+subgenre: "Synthwave"
+mood: "Nostálgico, atmosférico"
+tempo: "105-110 BPM"
+key: "C Minor o A Minor"
+time_signature: "4/4"
+structure: "Intro → Verse → Chorus → Verse → Chorus → Bridge → Outro"
+
+instruments:
+  - "Analog synthesizers"
+  - "Electric bass (synth bass)"
+  - "Electronic drums (punchy, 80s-style)"
+  - "Atmospheric pads"
+  - "Arpeggiators"
+
+effects:
+  - "Reverb (espacioso)"
+  - "Delay (ping-pong)"
+  - "Chorus (analog warmth)"
+  - "Sidechain compression"
+
+references:
+  - "Kavinsky - Nightcall"
+  - "The Midnight - Sunset"
+  - "Gunship - Tech Noir"
+---
+
+# Prompt
+
+Synthwave track, 105 BPM, nostalgic and atmospheric, analog synthesizers, warm pads, punchy electronic drums with 80s aesthetic, driving synth bassline, cinematic feel, emotional but energetic, perfect for night driving through neon-lit streets, retro-futuristic atmosphere, melancholic yet hopeful
+
+# Notas de uso
+
+- **Funciona mejor con**: Escenas nocturnas, conducción, ambientes retrofuturistas
+- **Variaciones sugeridas**:
+  - Agregar "with saxophone solo" para un toque más jazzy
+  - Cambiar a 120 BPM para versión más energética
+  - Agregar "vocoder vocals" para estilo más Daft Punk
+  - Usar "darker, cyberpunk atmosphere" para mood más oscuro
+  
+- **Evitar**: 
+  - Instrumentación acústica (rompe la estética)
+  - BPM muy rápido (pierde groove)
+  - Demasiados elementos (mantener espacioso)
+
+# Tips adicionales
+
+- El rango de **100-115 BPM** es ideal para synthwave
+- **C Minor** y **A Minor** funcionan excelente para mood nostálgico
+- Mencionar "80s aesthetic" ayuda mucho a lograr el sonido correcto
+- Palabras clave efectivas: "neon", "night drive", "retro", "cinematic"
+- El balance entre nostalgia y energía es crítico
+
+# Historial
+
+- v1.0 (2024-12-24): Versión inicial con parámetros básicos

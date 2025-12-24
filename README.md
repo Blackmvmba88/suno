@@ -62,27 +62,93 @@ Piensa en esto como un **cuaderno de laboratorio**, no como un producto cerrado.
 
 ## 🛠️ Estado del proyecto
 
-🟡 **Activo / Experimental**
+🟢 **Activo / En desarrollo**
 
-Este repo está en constante cambio.
-No se garantiza estabilidad, solo aprendizaje.
+Este repo está en constante evolución.
+No se garantiza estabilidad, pero sí aprendizaje y mejora continua.
+
+### ✅ Completado
+
+* [x] Estructura de directorios organizada
+* [x] Templates para prompts, metadata y experimentos
+* [x] Herramientas de validación y búsqueda
+* [x] Documentación completa
+* [x] Ejemplos de referencia
+* [x] Workflow CI/CD para validación
+* [x] Guías de contribución
 
 ---
 
-## 🌱 Roadmap (alto nivel)
+## 🌱 Roadmap (próximos pasos)
 
-* [ ] Librería de prompts curados
-* [ ] Normalización de metadata musical
+### Corto plazo
+* [ ] Expandir librería de prompts curados (más géneros)
+* [ ] Agregar más experimentos documentados
+* [ ] Desarrollar herramienta de análisis de patrones
+* [ ] Crear visualizaciones de metadata
+
+### Mediano plazo
 * [ ] Herramientas para letras sincronizadas
+* [ ] Integración con APIs de Suno (cuando disponible)
+* [ ] Dashboard web para explorar el catálogo
+* [ ] Sistema de recomendaciones basado en metadata
+
+### Largo plazo
 * [ ] Integración con interfaces visuales
 * [ ] Automatización de publicación / versiones
+* [ ] Análisis de ML sobre qué prompts funcionan mejor
+* [ ] Comunidad de experimentadores
+
+---
+
+## 🚀 Cómo empezar
+
+### Explorar el contenido
+
+```bash
+# Ver prompts de ejemplo
+ls prompts/examples/
+
+# Ver experimentos documentados
+ls experiments/
+
+# Ver metadata de tracks
+ls metadata/tracks/
+```
+
+### Usar las herramientas
+
+```bash
+# Instalar dependencias (Python 3.9+)
+pip install -r requirements.txt
+
+# Validar metadata
+python tools/validate_metadata.py metadata/
+
+# Buscar tracks
+python tools/search_metadata.py --genre synthwave
+python tools/search_metadata.py --bpm 110-120
+```
+
+### Ver guías rápidas
+
+- **[QUICKSTART.md](QUICKSTART.md)**: Referencia rápida para tareas comunes
+- **[CONTRIBUTING.md](CONTRIBUTING.md)**: Guía completa de contribución
+- **Copilot instructions**: `.github/copilot-instructions.md` para AI agents
 
 ---
 
 ## 🤝 Contribuciones
 
-Ideas, mejoras y experimentos son bienvenidos.
-Si algo te vibra, documenta y súmalo.
+Ideas, mejoras y experimentos son **muy bienvenidos**.
+
+Ver **[CONTRIBUTING.md](CONTRIBUTING.md)** para:
+- Cómo agregar prompts, metadata o experimentos
+- Convenciones de código y estilo
+- Proceso de PR
+- Ideas de contribución
+
+Si algo te vibra, documéntalo y súmalo. 🎵
 
 ---
 
