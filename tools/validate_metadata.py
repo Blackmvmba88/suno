@@ -181,6 +181,8 @@ def main():
         files = [path]
     else:
         files = list(path.glob('**/*.yaml')) + list(path.glob('**/*.yml'))
+        # Exclude schema files (they're documentation, not metadata)
+        files = [f for f in files if 'schema' not in f.name.lower()]
     
     if not files:
         print(f"No YAML files found in '{path}'")
