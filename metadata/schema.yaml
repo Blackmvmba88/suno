@@ -1,0 +1,107 @@
+# Track Metadata Schema
+
+Este archivo define el schema estándar para metadata de tracks.
+
+```yaml
+# Identificación
+track_id: string              # ID único del track (ej: "track-001")
+title: string                 # Título de la canción
+artist: string                # Artista o proyecto
+creation_date: date           # Fecha de creación (YYYY-MM-DD)
+
+# Información musical
+musical:
+  genre: string               # Género principal
+  subgenre: string           # Subgénero (opcional)
+  bpm: integer               # Tempo en beats por minuto
+  key: string                # Tonalidad (ej: "C Minor", "A Major")
+  time_signature: string     # Compás (ej: "4/4", "3/4")
+  duration_seconds: integer  # Duración en segundos
+
+# Mood y características
+mood:
+  primary: string            # Mood principal
+  secondary: string          # Mood secundario (opcional)
+  energy_level: integer      # 1-10, nivel de energía
+  danceability: integer      # 1-10, qué tan bailable es
+  emotional_valence: integer # 1-10, triste(1) a feliz(10)
+
+# Composición
+composition:
+  structure: array[string]   # Lista de secciones ["Intro", "Verse", ...]
+  has_vocals: boolean        # Tiene vocales
+  vocal_type: string         # Tipo de vocal (ej: "Synthetic/AI", "Human")
+  language: string           # Idioma (ej: "es", "en")
+
+# Producción
+production:
+  instruments: array[string] # Lista de instrumentos
+  effects: array[string]     # Efectos aplicados
+  mixing_style: string       # Descripción del estilo de mezcla
+
+# Generación/Creación
+generation:
+  method: string             # "AI-full", "AI-assisted", "Human"
+  ai_model: string          # Modelo usado (ej: "Suno v3")
+  prompt_version: string    # Versión del prompt usado
+  seed: integer             # Seed para reproducibilidad (opcional)
+  iterations: integer       # Número de iteraciones
+
+# Tags
+tags: array[string]         # Tags descriptivos
+
+# Uso y derechos
+usage:
+  license: string           # Tipo de licencia
+  copyright: string         # Info de copyright
+  can_remix: boolean        # Permite remixes
+  can_distribute: boolean   # Permite distribución
+
+# Referencias
+references:
+  inspired_by: array[string]  # Inspiraciones
+  similar_tracks: array[string] # Tracks similares en el catálogo
+
+# Notas
+notes: string               # Notas adicionales
+
+# Archivos relacionados
+files:
+  audio: string             # Path al archivo de audio
+  lyrics: string            # Path a las letras (opcional)
+  prompt: string            # Path al prompt usado (opcional)
+  cover_art: string         # Path al cover art (opcional)
+```
+
+## Campos requeridos
+
+Mínimo necesario para validación:
+- `track_id`
+- `title`
+- `musical.genre`
+- `musical.bpm`
+- `creation_date`
+
+## Valores sugeridos
+
+### genre
+- Electronic, Rock, Pop, Jazz, Hip-Hop, Classical, Ambient, Folk, Metal, etc.
+
+### mood.primary
+- Energetic, Melancholic, Epic, Relaxing, Dark, Bright, Nostalgic, Aggressive, Peaceful, etc.
+
+### generation.method
+- `AI-full`: Completamente generado por IA
+- `AI-assisted`: IA + edición humana significativa
+- `Human`: Principalmente creación humana
+
+### usage.license
+- `Personal`: Solo uso personal
+- `CC-BY`: Creative Commons Attribution
+- `CC-BY-SA`: Creative Commons Attribution-ShareAlike
+- `All Rights Reserved`: Todos los derechos reservados
+- `Custom`: Licencia personalizada (especificar en notes)
+
+## Extensiones
+
+Puedes agregar campos personalizados, pero mantén compatibilidad con este schema base.

@@ -1,0 +1,46 @@
+name: Validate Metadata
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'metadata/**/*.yaml'
+      - 'metadata/**/*.yml'
+      - 'tools/validate_metadata.py'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'metadata/**/*.yaml'
+      - 'metadata/**/*.yml'
+      - 'tools/validate_metadata.py'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Validate metadata files
+      run: |
+        python tools/validate_metadata.py metadata/
+    
+    - name: Generate index (test)
+      run: |
+        python tools/generate_index.py --output /tmp/index.json
+        echo "Index generated successfully"
+        cat /tmp/index.json | head -20

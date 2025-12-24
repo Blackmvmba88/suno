@@ -1,59 +1,184 @@
-# Copilot / AI Agent Instructions — Sudoku Inteligente (MVP)
+# Copilot / AI Agent Instructions — Suno Experiments & Music AI Lab
 
-Purpose: short, actionable guidance so an AI coding agent can quickly be productive in this repo.
+Purpose: Guide AI agents to understand and contribute effectively to this music experimentation repository.
 
-## Quick summary (big picture)
-- Single FastAPI service (backend) that also serves a static web UI from `backend/app/static`.
-- Two core domains:
-  - Solver: logical Sudoku puzzle generation & backtracking solver (`backend/app/solver.py`).
-  - OCR: image -> 9x9 board extraction using OpenCV + pytesseract, optional TFLite digit model (`backend/app/ocr.py`).
-- Packaging: PyInstaller-based macOS `.app` + `.dmg` via `scripts/build_mac.sh` and `.github/workflows/macos_build.yml` (CI uses macOS runners and **Python 3.11**).
+## 🎯 Quick summary (big picture)
 
-## Quick start (commands you can run locally)
-- Setup env & deps (use Python 3.11 for parity with CI):
-  - python3.11 -m venv .venv && source .venv/bin/activate
-  - pip install -r backend/requirements.txt
-- Run server (dev):
-  - uvicorn backend.app.main:app --reload --port 8000
-  - or: python backend/entrypoint.py (opens browser)
-- Run tests (recommended):
-  - PYTHONPATH=backend pytest backend/tests -q  # or: cd backend && pytest
-- Package macOS locally (on macOS):
-  - chmod +x scripts/build_mac.sh && ./scripts/build_mac.sh
+This is a **creative laboratory** for music AI experimentation, not a production application:
+- **Prompts**: Curated musical prompts for AI generation (`prompts/`)
+- **Lyrics**: Song lyrics (AI-generated, hybrid, or human) (`lyrics/`)
+- **Metadata**: Structured information about tracks - BPM, key, mood, tags (`metadata/`)
+- **Experiments**: Sandbox for testing ideas and documenting learnings (`experiments/`)
+- **Tools**: Python utilities for validation, search, and indexing (`tools/`)
 
-## Useful endpoints & behavior (examples)
-- GET /api/new?difficulty=easy|medium|hard|expert  -> returns { puzzle, solution }
-- POST /api/solve  -> accepts { board: [[...]] } and returns { solution }
-- POST /api/ocr  -> multipart file upload; returns { board, confidences } (use curl: `curl -F "file=@/path/to/img.png" http://localhost:8000/api/ocr`)
-- POST /api/ocr/debug  -> returns PNG bytes with overlay for visual debugging
-- GET/POST /api/ocr/config  -> read/write OCR preprocessing config (repo `config/ocr_config.yaml` by default)
+The repository is organized for **experimentation, documentation, and learning** rather than deployment.
 
-## Important implementation details & repo-specific conventions (do not assume otherwise)
-- Import resilience: `backend/app/main.py` uses layered try/except imports to support three contexts: repository module import (`backend.app.*`), package-like import (`app.*`), and running file directly. When editing imports, keep this pattern or add tests for new import contexts.
-- Static files & packaging:
-  - Static UI served under `/static` (see `_get_static_dir()` in `main.py`) to avoid shadowing API routes.
-  - When packaged with PyInstaller, static files are read from `sys._MEIPASS`. `scripts/build_mac.sh` includes `--add-data backend/app/static:app/static` and `--add-data backend/app/models:app/models`.
-- OCR config path: `OCR_CONFIG` is loaded from a computed path in `backend/app/ocr.py`. The code resolves to `os.path.join(os.path.dirname(os.path.dirname(__file__)), '..', 'config', 'ocr_config.yaml')` which effectively points to the repo-level `config/ocr_config.yaml`. `load_config()` performs a shallow merge with `DEFAULT_CONFIG`. Be careful editing this path—tests rely on the existing behavior (GET reads defaults if missing; POST will create/overwrite the resolved file).
-- TFLite optional: TFLite interpreter may not be available; code falls back to pytesseract. To enable/rehabilitate TFLite digits:
-  - Train/convert using `backend/tools/train_digit_model.py --out backend/app/models/digit_model.tflite` (requires TensorFlow),
-  - Toggle `tflite.enabled` in config or use `/api/ocr/config` to set it.
-- System dependencies: OCR requires the Tesseract binary (not just the Python wrapper). Install with `brew install tesseract` on macOS, or system package on Linux.
+## 🚀 Quick start (commands you can run)
 
-## Tests & debugging tips
-- Tests use FastAPI `TestClient` and exercise endpoints (`backend/tests/*`). Run `pytest backend/tests` from repo root.
-- OCR debug endpoint `/api/ocr/debug` is useful for visually validating preprocessing and warp steps.
-- Fonts: test image generation uses `Arial.ttf` when available, otherwise falls back to `ImageFont.load_default()` — tests are robust to missing system fonts.
+```bash
+# Setup environment (Python 3.9+)
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 
-## When editing: test matrix & CI considerations
-- If you change packaging behavior, run `./scripts/build_mac.sh` locally (macOS) and check the artifact in `dist/`.
-- CI macos workflow is `.github/workflows/macos_build.yml` — it installs system deps (brew, tesseract), sets up Python 3.11 and runs `./scripts/build_mac.sh`.
-- Signing & notarization are **optional** and gated on secrets/env vars: `APPLE_API_KEY`, `APPLE_API_KEY_ID`, `APPLE_TEAM_ID`, `APPLE_SIGN_IDENTITY`. Add these to CI only if you control an Apple developer account.
-- Add/adjust tests in `backend/tests/` for any behavioral changes to OCR, solver, or config persistence.
+# Validate metadata files
+python tools/validate_metadata.py metadata/tracks/
 
-## Small implementation examples to reference
-- Solver uniqueness heuristic: `backend/app/solver.py` uses `count_solutions(..., limit=2)` to ensure generated puzzles have unique solutions.
-- OCR flow: `extract_board_from_bytes()` (in `ocr.py`) performs warp -> resize -> per-cell preprocess -> detect largest contour -> classify using TFLite (if available) else pytesseract.
-- Frontend interaction: `backend/app/static/app.js` fetches `/api/new`, `/api/solve`, `/api/ocr` and auto-invokes solving after successful OCR.
+# Generate searchable index
+python tools/generate_index.py --output metadata/index.json
+
+# Search tracks
+python tools/search_metadata.py --genre synthwave
+python tools/search_metadata.py --bpm 110-120
+python tools/search_metadata.py --mood nostalgic
+```
+
+## 📁 Directory structure & conventions
+
+```
+/
+├── prompts/           # Musical prompts for AI generation
+│   ├── templates/     # Reusable prompt templates
+│   └── README.md      # Prompt creation guide
+├── lyrics/            # Song lyrics (various sources)
+│   └── README.md      # Lyrics formatting guide
+├── metadata/          # Structured track information
+│   ├── schema.yaml    # Metadata schema definition
+│   ├── tracks/        # Individual track metadata files
+│   └── README.md      # Metadata documentation
+├── experiments/       # Experimental work & documentation
+│   ├── templates/     # Experiment documentation template
+│   └── README.md      # Experimentation guide
+├── tools/             # Python utilities
+│   ├── validate_metadata.py    # Validate YAML against schema
+│   ├── generate_index.py       # Create searchable index
+│   └── search_metadata.py      # Search tracks by criteria
+├── .gitignore         # Excludes audio files, API keys, etc.
+├── .editorconfig      # Code style consistency
+├── requirements.txt   # Python dependencies (currently: pyyaml)
+├── CONTRIBUTING.md    # Contribution guidelines
+└── README.md          # Project overview
+```
+
+## 🎵 Key workflows
+
+### Adding a new prompt
+1. Copy template: `cp prompts/templates/prompt-template.yaml prompts/my-prompt.yaml`
+2. Fill in details: genre, mood, BPM, instrumentation
+3. Document what works and what doesn't
+4. Include usage notes and variations
+
+### Adding track metadata
+1. Copy example: `cp metadata/tracks/example-track.yaml metadata/tracks/my-track.yaml`
+2. Complete all required fields (track_id, title, genre, bpm, creation_date)
+3. Add optional but recommended fields (mood, tags, instruments)
+4. Validate: `python tools/validate_metadata.py metadata/tracks/my-track.yaml`
+5. Commit only after validation passes
+
+### Documenting an experiment
+1. Create directory: `mkdir experiments/my-experiment`
+2. Copy template: `cp experiments/templates/experiment-template.md experiments/my-experiment/README.md`
+3. Document: hypothesis, method, results, learnings
+4. Include file references and next steps
+
+## 📋 Metadata schema (required fields)
+
+```yaml
+track_id: string       # Unique identifier
+title: string          # Track title
+creation_date: string  # YYYY-MM-DD
+musical:
+  genre: string        # Primary genre
+  bpm: integer         # Beats per minute
+```
+
+See `metadata/schema.yaml` for complete schema with optional fields.
+
+## 🔧 Tools usage
+
+### validate_metadata.py
+Validates YAML files against schema:
+- Checks required fields
+- Validates types
+- Warns about missing recommended fields
+- Validates ranges (BPM 20-300, ratings 1-10)
+
+### generate_index.py
+Creates JSON index for fast searching:
+- Extracts key fields from all tracks
+- Aggregates genres, moods, artists
+- Outputs to `metadata/index.json`
+
+### search_metadata.py
+Search tracks by criteria:
+- `--genre`: Filter by genre (partial match)
+- `--bpm`: Filter by BPM (single value ±5 or range)
+- `--mood`: Filter by mood (partial match)
+- `--artist`: Filter by artist name
+- `--tag`: Filter by tags
+- `--limit`: Limit results
+
+## 🎨 File naming conventions
+
+- Use **kebab-case**: `my-file-name.yaml`
+- Be descriptive but concise
+- Include date if relevant: `2024-12-experiment.md`
+- Audio files go in `.gitignore` (too large for git)
+
+## ⚠️ Important: What NOT to commit
+
+- Audio files (`.mp3`, `.wav`, `.flac`, etc.) — use `.gitignore`
+- API keys or secrets (`.env`, `secrets.yaml`)
+- Large model files (`.h5`, `.pt`, `.pth`)
+- Build artifacts or temporary files
+
+## 🧪 Philosophy & approach
+
+This is a **learning laboratory**, not a production system:
+- **Experimentation** over perfection
+- **Documentation** over code
+- **Iteration** over planning
+- **Learning from failures** as much as successes
+
+When contributing:
+- Document experiments even if they "fail"
+- Extract actionable learnings
+- Keep metadata consistent and validated
+- Be creative but organized
+
+## 📊 Quality standards
+
+Before committing:
+- [ ] Metadata validates with `validate_metadata.py`
+- [ ] Required fields are complete
+- [ ] File names follow conventions
+- [ ] Experiments document hypothesis, method, and learnings
+- [ ] No large binary files (audio, models)
+- [ ] No secrets or API keys
+
+## 🤝 Contributing
+
+See `CONTRIBUTING.md` for detailed contribution guidelines.
+
+Quick checklist:
+- Use appropriate directory for content type
+- Follow naming conventions
+- Validate metadata before commit
+- Document experiments thoroughly
+- Keep commits focused and descriptive
+
+## 💡 Common tasks for AI agents
+
+When asked to optimize or improve:
+- Add missing documentation
+- Create workflow automation
+- Improve tooling (validation, search, analysis)
+- Add templates for common patterns
+- Enhance metadata schema
+- Create visualization tools
+- Add export/import utilities
 
 ---
-If anything important is missing or a section is unclear, tell me what you'd like expanded or any specific workflow you'd like me to include (CI, release, testing edge cases), and I will iterate. ✅
+
+**Remember**: This is a creative space. The goal is learning and experimentation,
+not building a perfect system. Document everything, fail fast, and iterate. 🎵✨

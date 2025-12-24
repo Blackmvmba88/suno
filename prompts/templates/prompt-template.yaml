@@ -1,0 +1,46 @@
+---
+title: "[Título del Prompt]"
+genre: "[Género principal]"
+subgenre: "[Subgénero específico]"
+mood: "[Emoción/atmósfera principal]"
+tempo: "[BPM o rango]"
+key: "[Tonalidad, ej: C Minor]"
+time_signature: "4/4"
+structure: "[Intro → Verse → Chorus → etc]"
+
+# Instrumentación
+instruments:
+  - "[Instrumento 1]"
+  - "[Instrumento 2]"
+  - "[Instrumento 3]"
+
+# Efectos y producción
+effects:
+  - "[Efecto 1, ej: Reverb]"
+  - "[Efecto 2, ej: Delay]"
+
+# Referencias
+references:
+  - "[Artista o track de referencia 1]"
+  - "[Artista o track de referencia 2]"
+---
+
+# Prompt
+
+[Escribe aquí tu prompt detallado para el generador de IA]
+
+Ejemplo:
+"Synthwave track, 105 BPM, nostalgic and atmospheric with analog synths,
+warm pads, punchy electronic drums, driving bassline, 80s aesthetic,
+cinematic feel, emotional but energetic, perfect for night driving"
+
+# Notas de uso
+
+- **Funciona mejor con**: [Contexto donde este prompt es efectivo]
+- **Variaciones sugeridas**: [Cómo modificar para diferentes resultados]
+- **Evitar**: [Qué no hacer con este prompt]
+
+# Historial
+
+- v1.0 (2024-12-24): Versión inicial
+- v1.1 (fecha): [Ajustes realizados]
