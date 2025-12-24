@@ -7,6 +7,7 @@ Usage:
 """
 
 import json
+import sys
 import yaml
 from pathlib import Path
 import argparse
@@ -143,4 +144,4 @@ def main():
 
 
 if __name__ == '__main__':
-    exit(main())
+    sys.exit(main())

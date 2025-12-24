@@ -13,6 +13,9 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional
 
 
+# Files to exclude from validation (documentation, not metadata)
+EXCLUDED_PATTERNS = ['schema', 'template']
+
 # Required fields
 REQUIRED_FIELDS = {
     'track_id': str,
@@ -181,8 +184,8 @@ def main():
         files = [path]
     else:
         files = list(path.glob('**/*.yaml')) + list(path.glob('**/*.yml'))
-        # Exclude schema files (they're documentation, not metadata)
-        files = [f for f in files if 'schema' not in f.name.lower()]
+        # Exclude documentation files (not metadata)
+        files = [f for f in files if not any(pattern in f.name.lower() for pattern in EXCLUDED_PATTERNS)]
     
     if not files:
         print(f"No YAML files found in '{path}'")

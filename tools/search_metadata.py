@@ -9,6 +9,7 @@ Usage:
     python search_metadata.py --artist "Suno Lab"
 """
 
+import sys
 import yaml
 import argparse
 from pathlib import Path
@@ -192,4 +193,4 @@ def main():
 
 
 if __name__ == '__main__':
-    exit(main())
+    sys.exit(main())
